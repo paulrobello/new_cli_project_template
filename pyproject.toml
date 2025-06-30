@@ -1,0 +1,121 @@
+[project]
+name = "new_cli_project_template"
+dynamic = [
+    "version",
+]
+description = "New Cli Project Template"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Paul Robello", email = "probello@gmail.com" },
+]
+maintainers = [
+    { name = "Paul Robello", email = "probello@gmail.com" },
+]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Environment :: Console",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Other Audience",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+keywords = [
+    "ai",
+    "cli",
+    "tui",
+    "terminal",
+]
+dependencies = [
+    "python-dotenv>=1.1.1",
+    "rich>=14.0.0",
+    "typer>=0.16.0",
+    "par-ai-core>=0.3.1",
+    "tomli-w>=1.2.0",
+]
+packages = [
+    "src/new_cli_project_template",
+]
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/paulrobello/new_cli_project_template"
+Documentation = "https://github.com/paulrobello/new_cli_project_template/blob/main/README.md"
+Repository = "https://github.com/paulrobello/new_cli_project_template"
+Issues = "https://github.com/paulrobello/new_cli_project_template/issues"
+Discussions = "https://github.com/paulrobello/new_cli_project_template/discussions"
+Wiki = "https://github.com/paulrobello/new_cli_project_template/wiki"
+
+[project.scripts]
+new_cli_project_template = "new_cli_project_template.__main__:app"
+
+[build-system]
+requires = [
+    "hatchling",
+    "wheel",
+]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "build>=1.2.2",
+    "pyright>=1.1.396",
+    "pre-commit>=4.1.0",
+    "ruff>=0.11.0",
+    "pyinstrument>=5.0.1",
+    "ruff>=0.11.0",
+    "types-orjson>=3.6.2",
+    "scalene>=1.5.51",
+]
+
+[tool.hatch.version]
+path = "src/new_cli_project_template/__init__.py"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/new_cli_project_template",
+]
+include = [
+    "py.typed",
+    "**/*.py",
+    "**/*.html",
+    "**/*.gif",
+    "**/*.jpg",
+    "**/*.png",
+    "**/*.md",
+    "**/*.tcss",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/new_cli_project_template",
+    "LICENSE",
+    "README.md",
+    "pyproject.toml",
+]
+exclude = [
+    "*.pyc",
+    "__pycache__",
+    "*.so",
+    "*.dylib",
+]
+
+[tool.uv.sources.par-ai-core]
+path = "../par_ai_core"
+editable = true
