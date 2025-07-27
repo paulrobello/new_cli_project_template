@@ -213,7 +213,7 @@ debug: false  # Enable debug output and detailed logging
 # system_prompt: "You are a helpful assistant specialized in Python programming."
 # timeout: 30  # Request timeout in seconds
 # retry_attempts: 3  # Number of retry attempts for failed requests
-# 
+#
 # Custom endpoints for different providers:
 # custom_endpoints:
 #   - name: "local_ollama"
