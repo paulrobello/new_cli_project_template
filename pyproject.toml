@@ -75,7 +75,6 @@ dev = [
     "pre-commit>=4.2.0",
     "ruff>=0.12.5",
     "pyinstrument>=5.0.3",
-    "types-orjson>=3.6.2",
     "scalene>=1.5.51",
     "hatchling>=1.27.0",
 ]
@@ -114,7 +113,3 @@ exclude = [
     "*.so",
     "*.dylib",
 ]
-
-[tool.uv.sources.par-ai-core]
-path = "../par_ai_core"
-editable = true
