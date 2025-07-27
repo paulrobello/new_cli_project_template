@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import os
-import tomllib
 from pathlib import Path
 from typing import TypedDict
 
+import yaml
 from par_ai_core.llm_providers import LlmProvider, provider_env_key_names
 from pydantic import BaseModel, Field
 from rich.console import Console
@@ -39,11 +39,11 @@ class ConfigFile(BaseModel):
 def get_config_file_path() -> Path:
     """Get the path to the configuration file."""
     # Check for config file in current directory first, then home directory
-    local_config = Path("config.toml")
+    local_config = Path("config.yaml")
     if local_config.exists():
         return local_config
 
-    home_config = Path.home() / f".{__application_binary__}.toml"
+    home_config = Path.home() / f".{__application_binary__}.yaml"
     return home_config
 
 
@@ -55,8 +55,8 @@ def load_config_file() -> ConfigFile:
         return ConfigFile()
 
     try:
-        with open(config_path, "rb") as f:
-            config_data = tomllib.load(f)
+        with open(config_path, encoding="utf-8") as f:
+            config_data = yaml.safe_load(f)
         return ConfigFile(**config_data)
     except Exception as e:
         console = Console(stderr=True)
@@ -85,7 +85,7 @@ def validate_environment(ai_provider: LlmProvider) -> None:
 
 def create_example_config() -> None:
     """Create an example configuration file."""
-    config_path = Path("config.toml")
+    config_path = Path("config.yaml")
 
     if config_path.exists():
         console = Console(stderr=True)
@@ -93,21 +93,21 @@ def create_example_config() -> None:
         return
 
     example_config = """# Example configuration file for new_cli_project_template
-# Copy this to config.toml and adjust as needed
+# Copy this to config.yaml and adjust as needed
 
 # AI Provider configuration
-ai_provider = "OpenAI"  # Options: OpenAI, Anthropic, Google, Groq, XAI, Mistral, Bedrock, Ollama, LlamaCpp
-model = ""  # Leave empty to use default model for provider
-light_model = false  # Use lighter/faster model variant
-ai_base_url = ""  # Custom base URL for OpenAI-compatible providers
-temperature = 0.5  # Response creativity (0.0-2.0)
-debug = false  # Enable debug output
+ai_provider: "OpenAI"  # Options: OpenAI, Anthropic, Google, Groq, XAI, Mistral, Bedrock, Ollama, LlamaCpp
+model: ""  # Leave empty to use default model for provider
+light_model: false  # Use lighter/faster model variant
+ai_base_url: ""  # Custom base URL for OpenAI-compatible providers
+temperature: 0.5  # Response creativity (0.0-2.0)
+debug: false  # Enable debug output
 
 # TODO: Add your custom configuration options here
 # Examples:
-# max_tokens = 1000
-# system_prompt = "You are a helpful assistant."
-# output_format = "markdown"
+# max_tokens: 1000
+# system_prompt: "You are a helpful assistant."
+# output_format: "markdown"
 """
 
     with open(config_path, "w", encoding="utf-8") as f:

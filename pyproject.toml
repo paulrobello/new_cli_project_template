@@ -20,7 +20,6 @@ classifiers = [
     "Intended Audience :: End Users/Desktop",
     "Intended Audience :: Other Audience",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -39,10 +38,10 @@ keywords = [
 ]
 dependencies = [
     "python-dotenv>=1.1.1",
-    "rich>=14.0.0",
+    "rich>=14.1.0",
     "typer>=0.16.0",
-    "par-ai-core>=0.3.1",
-    "tomli-w>=1.2.0",
+    "par-ai-core>=0.3.2",
+    "PyYAML>=6.0",
 ]
 packages = [
     "src/new_cli_project_template",
@@ -71,14 +70,14 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
-    "build>=1.2.2",
-    "pyright>=1.1.396",
-    "pre-commit>=4.1.0",
-    "ruff>=0.11.0",
-    "pyinstrument>=5.0.1",
-    "ruff>=0.11.0",
+    "build>=1.2.2.post1",
+    "pyright>=1.1.403",
+    "pre-commit>=4.2.0",
+    "ruff>=0.12.5",
+    "pyinstrument>=5.0.3",
     "types-orjson>=3.6.2",
     "scalene>=1.5.51",
+    "hatchling>=1.27.0",
 ]
 
 [tool.hatch.version]

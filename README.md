@@ -10,17 +10,18 @@ A comprehensive Python project template for building AI-powered CLI applications
 - **Multi-Command CLI**: Process prompts, interactive chat, configuration management, and example AI tools
 - **Multiple AI Providers**: OpenAI, Anthropic, Google, Groq, XAI, Mistral, Bedrock, Ollama, LlamaCpp
 - **Flexible Input**: Direct prompts, file input, or stdin
-- **Configuration Management**: TOML files with layered configuration system
+- **Configuration Management**: YAML files with layered configuration system
 - **Rich Terminal UI**: Beautiful output with Rich library integration
 - **Streaming Responses**: Real-time AI output with proper error handling
 - **Type Safety**: Full type annotations throughout
-- **Modern Python**: Built with uv, ruff, pyright, and Python 3.11+
+- **Modern Tooling**: Built with uv, ruff, pyright, and Python 3.11+
 
 ## Technology Stack
 - **Python 3.11+** - Modern Python with latest features
 - **[PAR AI Core](https://github.com/paulrobello/par_ai_core)** - Multi-provider AI integration
 - **Typer** - Modern CLI framework with Rich integration
 - **Rich** - Beautiful terminal output and formatting
+- **PyYAML** - YAML configuration file support
 - **Pydantic** - Data validation and configuration
 - **uv** - Fast Python package management
 
@@ -49,7 +50,7 @@ This will:
 
 ## Prerequisites
 
-- Python 3.11 or higher
+- Python 3.11 or higher (3.11, 3.12, 3.13 supported)
 - An API key for at least one AI provider (see [API Keys](#api-keys) section)
 - [uv](https://docs.astral.sh/uv/) for package management (recommended) or pip
 
@@ -187,25 +188,56 @@ new_cli_project_template analyze-code main.js
 The application supports layered configuration:
 
 1. **CLI arguments** (highest priority)
-2. **Configuration files** (`config.toml` or `~/.new_cli_project_template.toml`)
+2. **Configuration files** (`config.yaml` or `~/.new_cli_project_template.yaml`)
 3. **Environment variables** (`.env` or `~/.new_cli_project_template.env`)
 4. **Defaults** (lowest priority)
 
 #### Create Configuration File
 ```shell
-# Creates config.toml in current directory
+# Creates config.yaml in current directory
 new_cli_project_template config --create
 ```
 
-Example `config.toml`:
-```toml
-ai_provider = "OpenAI"  # Options: OpenAI, Anthropic, Google, Groq, XAI, Mistral, Bedrock, Ollama, LlamaCpp
-model = ""  # Leave empty for default
-light_model = false  # Use faster/cheaper models
-ai_base_url = ""  # Custom API endpoint
-temperature = 0.7  # Response creativity (0.0-2.0)
-debug = false  # Enable debug output
+Example `config.yaml`:
+```yaml
+# AI Provider Configuration
+ai_provider: "OpenAI"  # Options: OpenAI, Anthropic, Google, Groq, XAI, Mistral, Bedrock, Ollama, LlamaCpp
+model: ""  # Leave empty for default model for provider
+light_model: false  # Use lighter/faster model variants when available
+ai_base_url: ""  # Custom base URL for OpenAI-compatible API endpoints
+temperature: 0.7  # Response creativity level (0.0 = deterministic, 2.0 = very creative)
+debug: false  # Enable debug output and detailed logging
+
+# Advanced Configuration Examples (uncomment and modify as needed):
+# max_tokens: 4000  # Maximum tokens in response
+# system_prompt: "You are a helpful assistant specialized in Python programming."
+# timeout: 30  # Request timeout in seconds
+# retry_attempts: 3  # Number of retry attempts for failed requests
+# 
+# Custom endpoints for different providers:
+# custom_endpoints:
+#   - name: "local_ollama"
+#     url: "http://localhost:11434"
+#   - name: "custom_openai"
+#     url: "https://api.your-domain.com/v1"
 ```
+
+### YAML Configuration Reference
+
+| Setting | Type | Default | Description |
+|---------|------|---------|-------------|
+| `ai_provider` | string | "OpenAI" | AI provider to use (see supported providers above) |
+| `model` | string | "" | Specific model name (leave empty for provider default) |
+| `light_model` | boolean | false | Use faster/cheaper model variants when available |
+| `ai_base_url` | string | "" | Custom API endpoint URL for OpenAI-compatible providers |
+| `temperature` | float | 0.5 | Creativity level (0.0-2.0, where 0.0 is deterministic) |
+| `debug` | boolean | false | Enable detailed debug output and logging |
+
+### Global vs Local Configuration
+
+- **Local**: `config.yaml` in your current directory (project-specific)
+- **Global**: `~/.new_cli_project_template.yaml` in your home directory (user-wide defaults)
+- **Priority**: Local config overrides global config, CLI args override both
 
 ### Environment Variables
 
@@ -328,7 +360,7 @@ new_cli_project_template process -p "List 5 Python tips" -o json | jq '.'
 
 ### Version 0.1.0
 - **Multi-Command CLI**: Comprehensive command structure with `process`, `chat`, `config`, and example tools
-- **Configuration Management**: TOML configuration files with layered settings
+- **YAML Configuration**: Modern YAML-based configuration system with layered settings
 - **Rich Terminal UI**: Beautiful output with syntax highlighting and formatting
 - **Streaming Responses**: Real-time AI output for better user experience
 - **Multiple Input Methods**: Direct prompts, file input, and stdin support
@@ -336,7 +368,9 @@ new_cli_project_template process -p "List 5 Python tips" -o json | jq '.'
 - **Modular Architecture**: Clean separation of concerns with extensible design
 - **Example AI Tools**: Summarization, translation, and code analysis examples
 - **Comprehensive Documentation**: Detailed usage examples and development guide
-- **Modern Python Stack**: Built with uv, ruff, pyright, and Python 3.11+
+- **Modern Tooling**: Built with uv, ruff, pyright, and Python 3.11+
+- **Quality Assurance**: Pre-commit hooks, automated formatting, and type checking
+- **Template Ready**: Designed for easy customization and extension
 
 ## Template Customization
 

@@ -30,8 +30,8 @@ This is a comprehensive Python project template built with modern tooling that p
 - `uv run ruff check src/new_cli_project_template --fix` - Lint with fixes
 
 ### Configuration Management
-- `config.toml` - Local project configuration (created with `config --create`)
-- `~/.new_cli_project_template.toml` - Global user configuration
+- `config.yaml` - Local project configuration (created with `config --create`)
+- `~/.new_cli_project_template.yaml` - Global user configuration
 - `.env` and `~/.new_cli_project_template.env` - Environment variables
 - Configuration precedence: CLI args > config file > environment > defaults
 
@@ -46,7 +46,7 @@ This is a comprehensive Python project template built with modern tooling that p
 - **src/new_cli_project_template/**: Main package directory
   - `__init__.py`: Package metadata, version, and application constants
   - `__main__.py`: Multi-command CLI application with improved structure
-  - `config.py`: Configuration management with TOML support
+  - `config.py`: Configuration management with YAML support
   - `logging_config.py`: Logging setup with Rich integration
   - `ai_utils.py`: AI processing utilities and example functions
 - **Entry point**: `new_cli_project_template.__main__:app` (Typer CLI with multiple commands)
@@ -65,7 +65,7 @@ This is a comprehensive Python project template built with modern tooling that p
 - `par-ai-core` - Multi-provider AI integration
 - `rich` - Terminal output formatting
 - `python-dotenv` - Environment variable loading
-- `tomli-w` - TOML configuration file support
+- `PyYAML` - YAML configuration file support
 - `pydantic` - Data validation for configuration
 
 ### CLI Commands
@@ -80,7 +80,7 @@ This is a comprehensive Python project template built with modern tooling that p
 - **ruff**: Line length 120, Google-style docstrings, modern Python (3.11+)
 - **pyright**: Basic type checking mode, Python 3.12 target
 - **Environment**: Loads from `.env` and `~/.new_cli_project_template.env`
-- **Config files**: TOML format with validation and layered configuration
+- **Config files**: YAML format with validation and layered configuration
 
 ### Development Standards
 - Python 3.11+ required

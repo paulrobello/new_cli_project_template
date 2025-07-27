@@ -5,9 +5,6 @@ from __future__ import annotations
 import os
 import warnings
 
-from langchain_core._api import LangChainBetaWarning
-
-warnings.simplefilter("ignore", category=LangChainBetaWarning)
 warnings.simplefilter("ignore", category=DeprecationWarning)
 
 

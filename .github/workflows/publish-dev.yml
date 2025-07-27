@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/new_project_template
+      url: https://test.pypi.org/p/new_cli_project_template
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 
@@ -18,22 +18,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-
       - name: Install dependencies
         run: |
-          uv sync
+          uv sync --all-extras --dev
 
       - name: Get version from __init__.py
         id: get_version
         run: |
-          version=$(uv run python -c "from src.new_project_template import __version__; print(__version__)")
+          version=$(uv run python -c "from src.new_cli_project_template import __version__; print(__version__)")
           echo "Raw version output: $version"
           echo "VERSION=$version" >> $GITHUB_ENV
 

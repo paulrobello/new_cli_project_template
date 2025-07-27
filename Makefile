@@ -21,25 +21,6 @@ run:		# Run app
 app_help:		# Show app help
 	$(run) $(lib)  --help
 
-.PHONY: dev
-dev:	        # Run in dev mode
-	$(run) textual run --dev -c $(lib)
-
-.PHONY: keys
-keys:	        # Run in keyboard input tester
-	$(run) textual keys
-
-.PHONY: borders
-borders:	        # Run border sample display
-	$(run) textual borders
-
-.PHONY: colors
-colors:	        # Run color sample display
-	$(run) textual colors
-
-.PHONY: console
-console:	        # Run textual dev console
-	$(run) textual console
 
 .PHONY: demo-rec
 demo-rec:
@@ -125,11 +106,11 @@ spackage:			# Create a source package for the library
 
 .PHONY: test-publish
 test-publish: package		# Upload to testpypi
-	$(publish) upload --index testpypi --check-url
+	$(twine) upload --repository testpypi --check-url
 
 .PHONY: publish
 publish: package		# Upload to pypi
-	$(publish) upload --check-url
+	$(twine) upload --check-url
 
 ##############################################################################
 # Utility.
