@@ -83,7 +83,7 @@ This is a comprehensive Python project template built with modern tooling that p
 - **Config files**: YAML format with validation and layered configuration
 
 ### Development Standards
-- Python 3.11+ required
+- Python 3.11+ required (supports 3.11, 3.12, 3.13)
 - Type annotations mandatory
 - Google-style docstrings
 - Uses `uv` for package management
@@ -99,3 +99,24 @@ This is a comprehensive Python project template built with modern tooling that p
 - Add custom AI functions in `ai_utils.py`
 - Modify logging configuration in `logging_config.py`
 - Update environment variables in `.env.example`
+
+## GitHub Workflows (Disabled by Default)
+
+The `.github/workflows/` directory contains disabled workflow files (`.yml.disabled`). To enable:
+1. Remove `.disabled` extension from workflow files
+2. Update package name references if project was renamed
+3. Configure PyPI/TestPyPI publishing secrets in GitHub repository settings
+
+Available workflows:
+- `build.yml.disabled` - Build, test, and tag releases
+- `publish.yml.disabled` - Publish to PyPI
+- `publish-dev.yml.disabled` - Publish to TestPyPI
+- `release.yml.disabled` - Create GitHub releases
+
+## Template Usage Notes
+
+This is a template repository designed for use with [bootstrap_project](https://github.com/paulrobello/bootstrap_project). When creating a new project:
+1. All instances of `new_cli_project_template` are automatically replaced with your project name
+2. GitHub workflows are disabled by default (rename to enable)
+3. Dependencies and configuration files are automatically updated
+4. Git repository is initialized with proper structure

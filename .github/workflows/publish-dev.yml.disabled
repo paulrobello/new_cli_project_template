@@ -2,15 +2,22 @@ name: Publish 🐍 📦 to TestPyPI
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Build and Test 🐍 distribution 📦"]
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   publish-to-testpypi:
-    if: github.event_name == 'workflow_dispatch'  # Only allow manual triggers
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     name: Publish 🐍 distribution 📦 to TestPyPI
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/new_cli_project_template
+      url: https://test.pypi.org/p/new-cli-project-template
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
 
@@ -26,7 +33,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
@@ -49,11 +56,18 @@ jobs:
           fi
 
       - name: Restore cached build artifacts
+        id: cache
         uses: actions/cache@v4
         with:
           path: dist
-          key: ${{ runner.os }}-3.11-x64-${{ hashFiles('**/pyproject.toml') }}-${{ github.sha }}
-          fail-on-cache-miss: true
+          key: ${{ runner.os }}-3.12-x64-${{ hashFiles('**/pyproject.toml') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-3.12-x64-${{ hashFiles('**/pyproject.toml') }}-
+            ${{ runner.os }}-3.12-x64-
+
+      - name: Build if artifacts not cached
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: make package
 
       - name: Publish distribution 📦 to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
@@ -68,3 +82,8 @@ jobs:
         with:
           args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} ${{ env.VERSION }} has been published to TestPyPI.'
         continue-on-error: true
+
+      - name: Cleanup on failure
+        if: failure()
+        run: |
+          rm -rf dist/ || true
