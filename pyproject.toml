@@ -37,11 +37,11 @@ keywords = [
     "terminal",
 ]
 dependencies = [
-    "python-dotenv>=1.1.1",
-    "rich>=14.1.0",
-    "typer>=0.16.0",
-    "par-ai-core>=0.3.2",
-    "PyYAML>=6.0",
+    "python-dotenv>=1.2.2",
+    "rich>=15.0.0",
+    "typer>=0.24.1",
+    "par-ai-core>=0.5.6",
+    "PyYAML>=6.0.3",
 ]
 packages = [
     "src/new_cli_project_template",
