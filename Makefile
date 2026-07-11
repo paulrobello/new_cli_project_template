@@ -83,6 +83,10 @@ typecheck:			# Perform static type checks with pyright
 typecheck-stats:			# Perform static type checks with pyright and print stats
 	$(pyright) --stats
 
+.PHONY: test
+test:				# Run the test suite with pytest
+	$(run) pytest
+
 .PHONY: checkall
 checkall: format lint typecheck 	        # Check all the things
 
@@ -96,6 +100,9 @@ pre-commit-update:
 
 ##############################################################################
 # Package/publish.
+.PHONY: build
+build: package spackage		# Build wheel and source distributions
+
 .PHONY: package
 package:			# Package the library (wheel only)
 	$(build) -w

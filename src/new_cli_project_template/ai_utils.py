@@ -121,7 +121,7 @@ def stream_ai_response(
     prompt: str,
     system_prompt: str = "You are a helpful assistant.",
     debug: bool = False,
-) -> Generator[str, None, None]:
+) -> Generator[str]:
     """Stream AI response for real-time output.
 
     Args:
