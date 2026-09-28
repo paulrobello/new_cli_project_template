@@ -77,3 +77,38 @@ __pypackages__/
 **/.DS_Store
 **/ls_volume
 **/.terraform
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+*.local
+*.local.*
+*-mcp.json
+
+# Logs and runtime output
+*.log
+*.pid
+*.seed
+*.tmp
+tmp/
+temp/
+
+# OS and editor noise
+.vscode/
+*.swp
+*.swo
+
+# Agent/tool local state
+.superpowers/
+.gemini/
+.gemini-clipboard/
+claude_scratch/
+.claude/.cc2cc-session-id
+.claude/scheduled_tasks.lock
+.claude/statusline-*
+
+# Tool caches
+.mypy_cache/
+.cache/
+coverage/

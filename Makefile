@@ -63,9 +63,12 @@ shell:			# Start shell inside of .venv
 ##############################################################################
 # Checking/testing/linting/etc.
 
-.PHONY: format
-format:                         # Reformat the code with ruff.
+.PHONY: fmt
+fmt:                            # Reformat the code with ruff.
 	$(ruff) format src/$(lib)
+
+.PHONY: format
+format: fmt                     # Alias for fmt.
 
 .PHONY: lint
 lint:                           # Run ruff lint over the library
