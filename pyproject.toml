@@ -37,9 +37,9 @@ keywords = [
     "terminal",
 ]
 dependencies = [
-    "python-dotenv>=1.2.2",
+    "python-dotenv>=1.2.3",
     "rich>=15.0.0",
-    "typer>=0.26.8",
+    "typer>=0.27.2",
     "par-ai-core>=0.5.9",
     "PyYAML>=6.0.3",
 ]
@@ -70,13 +70,13 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
-    "build>=1.5.1",
-    "pyright>=1.1.411",
-    "pre-commit>=4.6.0",
-    "ruff>=0.15.21",
-    "pyinstrument>=5.1.2",
+    "build>=1.6.1",
+    "pyright>=1.1.414",
+    "pre-commit>=4.6.2",
+    "ruff>=0.16.9",
+    "pyinstrument>=5.1.3",
     "scalene>=2.3.0",
-    "hatchling>=1.31.0",
+    "hatchling>=1.32.4",
     "pytest>=9.1.1",
 ]
 
